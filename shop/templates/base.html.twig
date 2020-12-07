@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Yoshop{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-4/bootstrap-reboot.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-4/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-4/bootstrap-grid.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/fontawsome-5.all.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/projet.css') }}"/>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% include "_partials/_navbar.html.twig" %}
+{% block body %}{% endblock %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
