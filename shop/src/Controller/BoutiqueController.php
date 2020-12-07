@@ -11,7 +11,7 @@ class BoutiqueController extends AbstractController {
     */
     public function index(BoutiqueService $boutique) {
         //$categories = $boutique->findAllCategories();
-        return $this->render('base.html.twig', [
+        return $this->render('guest/index.html.twig', [
             'number' => 25,
         ]);
     }

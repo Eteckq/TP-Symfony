@@ -2,23 +2,10 @@
 namespace App\Service;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-// Un service pour manipuler le contenu de la Boutique
-//  qui est composée de catégories et de produits stockés "en dur"
 class BoutiqueService {
 
-    // constructeur du service : injection des dépendances et tris
     public function __construct(RequestStack $requestStack) {
-        // Injection du service RequestStack
-        //  afin de pouvoir récupérer la "locale" dans la requête en cours
         $this->requestStack = $requestStack;
-        // On trie le tableau des catégories selon la locale
-        /* usort($this->categories, function ($c1, $c2) {
-            return $this->compareSelonLocale($c1["libelle"], $c2["libelle"]);
-        }); */
-        // On trie le tableau des produits de chaque catégorie selon la locale
-        /* usort($this->produits, function ($c1, $c2) {
-            return $this->compareSelonLocale($c1["libelle"], $c2["libelle"]);
-        }); */
     }
 
     // renvoie toutes les catégories
@@ -26,47 +13,6 @@ class BoutiqueService {
         return $this->categories;
     }
 
-    // renvoie la categorie dont id == $idCategorie
-    public function findCategorieById(int $idCategorie) {
-        $res = array_filter($this->categories,
-                function ($c) use($idCategorie) {
-            return $c["id"] == $idCategorie;
-        });
-        return (sizeof($res) === 1) ? $res[array_key_first($res)] : null;
-    }
-
-    // renvoie le produits dont id == $idProduit
-    public function findProduitById(int $idProduit) {
-        $res = array_filter($this->produits,
-                function ($p) use($idProduit) {
-            return $p["id"] == $idProduit;
-        });
-        return (sizeof($res) === 1) ? $res[array_key_first($res)] : null;
-    }
-
-    // renvoie tous les produits dont idCategorie == $idCategorie
-    public function findProduitsByCategorie(int $idCategorie) {
-        return array_filter($this->produits,
-                function ($p) use($idCategorie) {
-            return $p["idCategorie"] == $idCategorie;
-        });
-    }
-
-    // renvoie tous les produits dont libelle ou texte contient $search
-    public function findProduitsByLibelleOrTexte(string $search) {
-        return array_filter($this->produits,
-                function ($p) use ($search) {
-                  return ($search=="" || mb_strpos(mb_strtolower($p["libelle"]." ".$p["texte"]), mb_strtolower($search)) !== false);
-        });
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-
-    private function compareSelonLocale(string $s1, $s2) {
-        /* $collator=new \Collator($this->requestStack->getCurrentRequest()->getLocale());
-         return collator_compare($collator, $s1, $s2);
-         */
-    }
 
     private $requestStack; // Le service RequestStack qui sera injecté
     // Le catalogue de la boutique, codé en dur dans un tableau associatif
