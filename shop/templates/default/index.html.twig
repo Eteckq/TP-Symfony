@@ -3,5 +3,5 @@
 {% block title %}Yoshop - Accueil{% endblock %}
 
 {% block body %}
-<h1> Guest </h1>
+{{dump(app.request.attributes.get('_route_params'))}}
 {% endblock %}

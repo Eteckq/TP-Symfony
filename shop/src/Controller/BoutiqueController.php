@@ -5,10 +5,10 @@ use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CategoryController extends AbstractController {
-
+class BoutiqueController extends AbstractController {
+    
     /**
-    * @Route("/boutique", name="boutique")
+    * @Route("/{_locale}/boutique", name="boutique", requirements={"_locale": "fr|en|es"})
     */
     public function index(BoutiqueService $boutique) {
         $categories = $boutique->findAllCategories();
@@ -19,7 +19,7 @@ class CategoryController extends AbstractController {
     }
 
     /**
-    * @Route("/category/{id}", name="category.show")
+    * @Route("/{_locale}/rayon/{id}", name="category.show", requirements={"_locale": "fr|en|es"})
     */
     public function show(Category $category) {
         return $this->render('default/category.html.twig', [

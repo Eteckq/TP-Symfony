@@ -4,15 +4,15 @@
     class="navbar-toggler"
     type="button"
     data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
+    data-target="#navbar"
+    aria-controls="navbar"
     aria-expanded="false"
     aria-label="Toggle navigation"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {% if menu == 'home' %} active {% endif %}">
         <a class="nav-link" href="{{ path('home') }}">{{ "Home" | trans }}</a>
@@ -73,41 +73,20 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          EUR
-        </span>
-        <div
-          class="dropdown-menu"
-          aria-labelledby="dropdown02"
-          style="min-width: 5rem"
-        >
-        
-          <a
-            class="dropdown-item"
-            href="/mi5/fr/changer_monnaie/CAD/home/%7B%22_locale%22:%22fr%22%7D"
-          >
-            CAD
-          </a>
-        </div>
-      </li>
-    </ul>
-    <ul class="navbar-nav my-0">
-      <li class="nav-item dropdown">
-        <span
-          class="nav-link dropdown-toggle"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          {# <img src="/mi5/images/locale/fr.png" alt="Fr" /> #}
+          <img src="{{ asset('images/locales/' ~ app.request.locale ~ '.png') }}" alt="{{app.request.locale}}" />
         </span>
         <div
           class="dropdown-menu"
           aria-labelledby="dropdown03"
           style="min-width: 5rem"
         >
-          <a class="dropdown-item" href="/mi5/en">
-            {# <img src="/mi5/images/locale/en.png" alt="En" /> #}
-          </a>
+          {% for locale in locales %}
+            {% if locale != app.request.locale %}
+            <a class="dropdown-item" href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({ _locale: locale })) }}">
+              <img src="{{ asset('images/locales/' ~ locale ~ '.png') }}" alt="{{ locale }}" />
+            </a>
+            {% endif %}
+          {% endfor %}
         </div>
       </li>
     </ul>

@@ -149,4 +149,15 @@ class Article
 
         return $this;
     }
+
+    /**
+     * @return int Return the total all commands quantities
+     */
+    public function getTotalOfOrders(){
+        $total = 0;
+        foreach ($this->commandLines as $key => $commandLine) {
+            $total += $commandLine->getQuantite();
+        }
+        return $total;
+    }
 }

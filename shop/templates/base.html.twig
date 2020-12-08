@@ -12,13 +12,14 @@
 </head>
 <body>
 {% include "_partials/_navbar.html.twig" %}
+
 <div class="row container-fluid  main-div">
     <div class="col-md-10">
 
         {% block body %}{% endblock %}
     </div>
     <div class="col-md-2">
-        {% include "_partials/_top-products.html.twig" %}
+        {{ render(controller('App\\Controller\\ArticleController::topSales', {'max': 3})) }}
     </div>
 </div>
 

@@ -42,7 +42,7 @@ class Command
     private $statut;
 
     /**
-     * @ORM\OneToMany(targetEntity=CommandLine::class, mappedBy="id_article", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=CommandLine::class, mappedBy="id_command", orphanRemoval=true)
      */
     private $commandLines;
 

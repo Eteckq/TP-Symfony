@@ -2,18 +2,25 @@
 namespace App\Service;
 
 use App\Repository\CategoryRepository;
+use App\Repository\ArticleRepository;
 
 class BoutiqueService {
 
-    private  $categories;
+    private $categories;
+    private $articles;
 
-    public function __construct(CategoryRepository $categories) {
+    public function __construct(CategoryRepository $categories, ArticleRepository $articles) {
         $this->categories = $categories;
+        $this->articles = $articles;
     }
 
     // renvoie toutes les catégories
     public function findAllCategories() {
         return $this->categories->findAll();
+    }
+
+    public function getTopSales($max){
+        return $this->categories->findOneBy(['id' => 4])->getArticles();
     }
 
 
