@@ -1,22 +1,24 @@
 <?php
 namespace App\Service;
-use Symfony\Component\HttpFoundation\RequestStack;
+
+use App\Repository\CategoryRepository;
 
 class BoutiqueService {
 
-    public function __construct(RequestStack $requestStack) {
-        $this->requestStack = $requestStack;
+    private  $categories;
+
+    public function __construct(CategoryRepository $categories) {
+        $this->categories = $categories;
     }
 
     // renvoie toutes les catégories
     public function findAllCategories() {
-        return $this->categories;
+        return $this->categories->findAll();
     }
 
 
-    private $requestStack; // Le service RequestStack qui sera injecté
     // Le catalogue de la boutique, codé en dur dans un tableau associatif
-    private $categories = [
+    /* private $categories = [
         [
             "id" => 1,
             "libelle" => "Fruits",
@@ -108,5 +110,5 @@ class BoutiqueService {
             "visuel" => "images/oreo.jpg",
             "prix" => 2.50
         ],
-    ];
+    ]; */
 }

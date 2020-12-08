@@ -1,35 +1,115 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item {% if menu == 'home' %} active {% endif %}">
+        <a class="nav-link" href="{{ path('home') }}">{{ "Home" | trans }}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      <li class="nav-item {% if menu == 'boutique' %} active {% endif %}">
+        <a class="nav-link" href="{{ path('boutique') }}"><i class="fas fa-store"></i> {{ "Shop" | trans }}</a>
+      </li>
+      <li class="nav-item {% if menu == 'cart' %} active {% endif %}">
+        <a class="nav-link" href="#"
+          ><i class="fas fa-shopping-cart"></i> {{ "Cart" | trans }}</a
+        >
+      </li>
+      <li class="nav-item {% if menu == 'contact' %} active {% endif %}">
+        <a class="nav-link" href="{{ path('contact') }}"><i class="fas fa-comments"></i> {{ "Contact" | trans }}</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <i class="fas fa-user"></i> {{ "Connect" | trans }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">{{ "Connect" | trans }}/{{ "Register" | trans }}</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">{{ "MyAccount" | trans }}</a>
+          <a class="dropdown-item" href="#">{{ "MyOrders" | trans }}</a>
+          <a class="dropdown-item" href="#">{{ "Disconect" | trans }}</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link disabled" href="#"
+          ><i class="fas fa-tools"></i> Back Office</a
+        >
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Chercher des produits"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
     </form>
+    <ul class="navbar-nav my-0">
+      <li class="nav-item dropdown">
+        <span
+          class="nav-link dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          EUR
+        </span>
+        <div
+          class="dropdown-menu"
+          aria-labelledby="dropdown02"
+          style="min-width: 5rem"
+        >
+        
+          <a
+            class="dropdown-item"
+            href="/mi5/fr/changer_monnaie/CAD/home/%7B%22_locale%22:%22fr%22%7D"
+          >
+            CAD
+          </a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav my-0">
+      <li class="nav-item dropdown">
+        <span
+          class="nav-link dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {# <img src="/mi5/images/locale/fr.png" alt="Fr" /> #}
+        </span>
+        <div
+          class="dropdown-menu"
+          aria-labelledby="dropdown03"
+          style="min-width: 5rem"
+        >
+          <a class="dropdown-item" href="/mi5/en">
+            {# <img src="/mi5/images/locale/en.png" alt="En" /> #}
+          </a>
+        </div>
+      </li>
+    </ul>
   </div>
 </nav>

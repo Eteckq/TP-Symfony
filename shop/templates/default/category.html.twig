@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %} {% block title %}Yoshop - Boutique{% endblock %}
+{% block body %}
+
+<div class="card col-md-12">
+  <div class="card-header">
+    <h1><i class="fas fa-store"></i> {{category.libelle}}</h1>
+  </div>
+  
+  <div class="card-body row">
+    {% for article in category.articles %}
+    <div class="col-md-3">
+      <a
+        class="card clickable"
+        href="#"
+      >
+        <img
+          src="/images/{{ article.visuel }}"
+          class="card-img-top"
+          alt="{{ article.libelle }}"
+        />
+        <div class="card-body">
+          <h4 class="card-title">{{ article.libelle }}</h4>
+          <p class="card-text"><i>{{ article.texte }}</i></p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}
