@@ -3,5 +3,20 @@
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-<h1> Contact </h1>
+<div class="card col-md-6 offset-3">
+        <div class="card-header">
+            <h1><i class="fas fa-comments"></i> Contact</h1>
+            <p>(Oui, j'ai bien copier/coller votre front)</p>
+        </div>
+        <div class="card-body">
+            <div class="card clickable" onclick="window.open('https://yohangastoud.fr')">
+                <img src="{{ asset('/images/iut2_info.png') }}" class="card-img" alt="logo IUT2">
+                <div class="card-body">
+                    <h1 class="card-title"><i class="fas fa-code"></i> Licence Pro MI AW</h1>
+                    <h2 class="card-title"><i class="fab fa-symfony"></i> Module MI5</h2>
+                    <p><i class="far fa-copyright"></i> Ph. Martin, 2019/20</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

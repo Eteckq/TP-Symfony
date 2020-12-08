@@ -14,11 +14,11 @@
 {% include "_partials/_navbar.html.twig" %}
 
 <div class="row container-fluid  main-div">
-    <div class="col-md-10">
+    <div class="col-md-9">
 
         {% block body %}{% endblock %}
     </div>
-    <div class="col-md-2">
+    <div class="col-md-3">
         {{ render(controller('App\\Controller\\ArticleController::topSales', {'max': 3})) }}
     </div>
 </div>
@@ -26,5 +26,10 @@
 <script src="{{ asset('js/jquery-3/jquery.slim.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap-4/bootstrap.bundle.min.js') }}"></script>
 {% block javascripts %}{% endblock %}
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 </body>
 </html>
