@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Command
 {
+
+    const STATUS = [
+        0 => "En attente",
+        1 => "Validée"
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -43,6 +49,7 @@ class Command
     public function __construct()
     {
         $this->commandLines = new ArrayCollection();
+        $this->date_command = new \DateTime();
     }
 
     public function getId(): ?int

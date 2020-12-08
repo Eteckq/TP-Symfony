@@ -1,15 +1,15 @@
 <?php
 namespace App\Controller;
-use App\Service\BoutiqueService;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BoutiqueController extends AbstractController {
+class ArticleController extends AbstractController {
 
     /**
-    * @Route("/")
+    * @Route("/articles")
     */
-    public function index(BoutiqueService $boutique) {
+    public function index(ArticleRepository $repository) {
         //$categories = $boutique->findAllCategories();
         return $this->render('default/index.html.twig', [
             'number' => 25,
