@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Service\PanierService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,11 @@ class CartController extends AbstractController {
     /**
     * @Route("/{_locale}/cart", name="cart", requirements={"_locale": "fr|en|es"})
     */
-    public function index() {
+    public function index(PanierService $panier) {
+
         return $this->render('default/cart.html.twig', [
             'menu' => "cart",
+            'panier' =>  $panier->getContenu()
         ]);
     }
 

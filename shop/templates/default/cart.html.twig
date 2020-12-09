@@ -1,4 +1,20 @@
-{% extends 'base.html.twig' %} {% block title %}Yoshop - Panier{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Yoshop - Panier{% endblock %}
+
+{% block stylesheet %}
+<style>
+.cart-img-produit {
+  height: 40px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+</style>
+{% endblock %}
+
 {% block body %}
 <div class="card col-md-12">
   <div class="card-header">
@@ -29,45 +45,45 @@
           </tr>
         </thead>
         <tbody>
-        {# FOR EACH #}
+        {% for article in panier %}
           <tr>
             <td>
               <img
-                src="/mi5/images/produits/romanesco.jpg"
+                src="/images/articles/{{ article.visuel }}"
                 class="cart-img-produit"
-                alt="Chou Romanesco"
+                alt="{{ article.libelle }}"
               />
             </td>
             <td>
-              <a href="/mi5/fr/boutique/rayon/2">
-                <b>Chou romanesco</b>
+              <a href="{{ path('category.show', {id: article.idCategory.id} )}}">
+                <b>{{ article.libelle }}</b>
               </a>
             </td>
-            <td class="text-right">1,81&nbsp;€</td>
+            <td class="text-right">{{ article.prix }}</td>
             <td>
-              <a href="{{ path('cart.remove', {id: 32}) }}">
+              <a href="{{ path('cart.remove', {id: article.id}) }}">
                 <i class="fas fa-minus-square text-muted"></i>
               </a>
               1
-              <a href="{{ path('cart.add', {id: 32}) }}">
+              <a href="{{ path('cart.add', {id: article.id}) }}">
                 <i class="fas fa-plus-square text-muted"></i>
               </a>
             </td>
-            <td class="text-right">1,81&nbsp;€</td>
+            <td class="text-right">{{ article.prix * 2 }}</td>
             <td>
-              <a href="{{ path('cart.delete', {id: 32}) }}">
+              <a href="{{ path('cart.delete', {id: article.id}) }}">
                 <i
                   class="fas fa-trash text-muted"
                   data-toggle="tooltip"
                   title=""
                   data-placement="right"
                   data-html="true"
-                  data-original-title="Supprimer Chou Romanesco"
+                  data-original-title="Supprimer {{ article.libelle }}"
                 ></i>
               </a>
             </td>
           </tr>
-          {# END FOR EACH #}
+        {% endfor %}
         </tbody>
         <thead>
           <tr>
@@ -92,3 +108,4 @@
   </div>
 </div>
 {% endblock %}
+

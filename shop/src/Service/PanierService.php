@@ -23,6 +23,7 @@ class PanierService {
     // getContenu renvoie le contenu du panier
     //  tableau d'éléments [ "produit" => un produit, "quantite" => quantite ]
     public function getContenu() { // à compléter
+        return $this->boutique->getTopSales(2);
     }
     // getTotal renvoie le montant total du panier
     public function getTotal() { // à compléter
