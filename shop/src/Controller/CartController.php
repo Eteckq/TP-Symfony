@@ -7,13 +7,10 @@ use App\Service\PanierService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
-* @Route("/{_locale}/cart", requirements={"_locale"="fr|en|es"})
-*/
 class CartController extends AbstractController {
 
     /**
-    * @Route("/", name="cart", requirements={"_locale": "fr|en|es"})
+    * @Route("/{_locale}/cart", name="cart", requirements={"_locale": "fr|en|es"})
     */
     public function index(PanierService $panier) {
 
@@ -24,28 +21,28 @@ class CartController extends AbstractController {
     }
 
     /**
-    * @Route("/add/{id}", name="cart.add")
+    * @Route("/cart/add/{id}", name="cart.add")
     */
     public function addToCart(Article $article) {
         return $this->redirectToRoute("cart");
     }
 
     /**
-    * @Route("/remove/{id}", name="cart.remove")
+    * @Route("/cart/remove/{id}", name="cart.remove")
     */
     public function removeFromCart(Article $article) {
         return $this->redirectToRoute("cart");
     }
 
     /**
-    * @Route("/delete/{id}", name="cart.delete")
+    * @Route("/cart/delete/{id}", name="cart.delete")
     */
     public function deleteFromCart(Article $article) {
         return $this->redirectToRoute("cart");
     }
 
     /**
-    * @Route("/empty", name="cart.empty")
+    * @Route("/cart/empty", name="cart.empty")
     */
     public function emptyCart() {
         return $this->redirectToRoute("cart");
