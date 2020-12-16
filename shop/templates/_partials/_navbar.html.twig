@@ -41,7 +41,8 @@
           <i class="fas fa-user"></i> {{ "Connect" | trans }}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">{{ "Connect" | trans }}/{{ "Register" | trans }}</a>
+          <a class="dropdown-item" href="{{ path('app_login') }}">{{ "Connect" | trans }}</a>
+          <a class="dropdown-item" href="{{ path('app_register') }}">{{ "Register" | trans }}</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">{{ "MyAccount" | trans }}</a>
           <a class="dropdown-item" href="#">{{ "MyOrders" | trans }}</a>
