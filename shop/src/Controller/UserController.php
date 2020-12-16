@@ -5,16 +5,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
-* @Route("/{_locale}/admin", requirements={"_locale"="fr|en|es"})
-* @IsGranted("ROLE_ADMIN")
+* @Route("/{_locale}/user", requirements={"_locale"="fr|en|es"})
+* @IsGranted("ROLE_USER")
 */
-class AdminController extends AbstractController {
+class UserController extends AbstractController {
 
     /**
-    * @Route("/", name="admin")
+    * @Route("/", name="user")
     */
     public function index() {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('user/index.html.twig', [
             'menu' => "home",
         ]);
     }
