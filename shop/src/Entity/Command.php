@@ -105,7 +105,7 @@ class Command
     {
         if (!$this->commandLines->contains($commandLine)) {
             $this->commandLines[] = $commandLine;
-            $commandLine->setIdArticle($this);
+            $commandLine->setIdCommand($this);
         }
 
         return $this;
@@ -115,11 +115,29 @@ class Command
     {
         if ($this->commandLines->removeElement($commandLine)) {
             // set the owning side to null (unless already changed)
-            if ($commandLine->getIdArticle() === $this) {
-                $commandLine->setIdArticle(null);
+            if ($commandLine->getIdCommand() === $this) {
+                $commandLine->setIdCommand(null);
             }
         }
 
         return $this;
+    }
+
+    // CUSTOMS
+
+    public function getTotalPrice(){
+        $amount = 0;
+        foreach ($this->getCommandLines() as $commandLine) {
+            $amount += $commandLine->getPrix();
+        }
+        return $amount;
+    }
+
+    public function getTotalProducts(){
+        $amount = 0;
+        foreach ($this->getCommandLines() as $commandLine) {
+            $amount += $commandLine->getQuantite();
+        }
+        return $amount;
     }
 }

@@ -7,14 +7,14 @@
   <div class="card-body">
     <ul class="list-group">
     {% for article in articles %}
-      <a href="{{ path("category.show", {id: article.idCategory.id})}}">
+      <a href="{{ path("category.show", {id: article["category"]})}}">
         <li class="list-group-item text-center clickable">
           <img  src="/images/articles/{{ article.visuel }}"
                 style="height: 40px"
                 alt="{{ article.libelle }}"
           />
           
-          <p>{{article.libelle}}<br /><i>{{article.totalOfOrders}} {{'Sales' | trans }}</i></p>
+          <p>{{article.libelle}}<br /><i>{{article["quantite"]}} {{'Sales' | trans }}</i></p>
         </li>
       </a>
     {% endfor %}

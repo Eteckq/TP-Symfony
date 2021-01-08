@@ -1,7 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Yoshop - Accueil{% endblock %}
+{% block title %}Yoshop - Back office{% endblock %}
 
 {% block body %}
-ADMIN
+<a href="{{path('category_index')}}"
+          ><i class="fas fa-tools"></i> Gestion des catégories</a
+        >
+        <a href="{{path('article_index')}}"
+          ><i class="fas fa-tools"></i> Gestion des articles</a
+        >
+
+        
+        <a href="{{path('admin.orders')}}"
+          ><i class="fas fa-tools"></i> Validation des commandes</a
+        >
 {% endblock %}

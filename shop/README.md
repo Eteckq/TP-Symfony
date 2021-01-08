@@ -6,3 +6,5 @@ user: root
 pass: root
 
 (can be changed in .env)
+
+start with 'symfony server:start'

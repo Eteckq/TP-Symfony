@@ -28,7 +28,7 @@
       <li class="nav-item {% if menu == 'contact' %} active {% endif %}">
         <a class="nav-link" href="{{ path('contact') }}"><i class="fas fa-comments"></i> {{ "Contact" | trans }}</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown {% if menu == 'account' %} active {% endif %}">
         <a
           class="nav-link dropdown-toggle"
           href="#"
@@ -38,18 +38,25 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
+          {% if app.user %}
+          <i class="fas fa-user"></i> {{ app.user.prenom }}
+          {% else %}
           <i class="fas fa-user"></i> {{ "Connect" | trans }}
+          {% endif %}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">{{ "Connect" | trans }}/{{ "Register" | trans }}</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">{{ "MyAccount" | trans }}</a>
-          <a class="dropdown-item" href="#">{{ "MyOrders" | trans }}</a>
-          <a class="dropdown-item" href="#">{{ "Disconect" | trans }}</a>
+          {% if app.user %}
+          <a class="dropdown-item " href="{{ path('user.index') }}">{{ "MyAccount" | trans }}</a>
+          <a class="dropdown-item" href="{{ path('user.orders') }}">{{ "MyOrders" | trans }}</a>
+          <a class="dropdown-item" href="/fr/logout">{{ "Disconect" | trans }}</a>
+          {% else %}
+          <a class="dropdown-item" href="{{ path('app_login') }}">{{ "Connect" | trans }}</a>
+          <a class="dropdown-item" href="{{ path('app_register') }}">{{ "Register" | trans }}</a>
+          {% endif %}
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#"
+      <li class="nav-item {% if menu == 'back' %} active {% endif %}">
+        <a class="nav-link" href="{{path("admin")}}"
           ><i class="fas fa-tools"></i> Back Office</a
         >
       </li>

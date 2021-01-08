@@ -3,15 +3,19 @@ namespace App\Service;
 
 use App\Repository\CategoryRepository;
 use App\Repository\ArticleRepository;
+use App\Repository\CommandLineRepository;
+
 
 class BoutiqueService {
 
     private $categories;
     private $articles;
+    private $commandLines;
 
-    public function __construct(CategoryRepository $categories, ArticleRepository $articles) {
+    public function __construct(CategoryRepository $categories, ArticleRepository $articles, CommandLineRepository $commandLines) {
         $this->categories = $categories;
         $this->articles = $articles;
+        $this->commandLines = $commandLines;
     }
 
     // renvoie toutes les catégories
@@ -20,7 +24,11 @@ class BoutiqueService {
     }
 
     public function getTopSales($max){
-        return $this->categories->findOneBy(['id' => 4])->getArticles();
+        return $this->commandLines->findTopSells($max);
+    }
+
+    public function getProductById($id){
+        return $this->articles->findOneBy(['id' => $id]);
     }
 
 

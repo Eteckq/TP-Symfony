@@ -11,7 +11,7 @@
     <div class="col-md-3">
       <a
         class="card clickable"
-        href="#"
+        href="{{ path('cart.add', {id: article.id}) }}" 
       >
         <img
           src="/images/articles/{{ article.visuel }}"

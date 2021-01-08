@@ -19,16 +19,31 @@
 <div class="card col-md-12">
   <div class="card-header">
     <h1>
-      <i class="fas fa-shopping-cart"></i> TODO 3 Produit(s) :
-      <b>TODO 1,81€</b>
+    <i class="fas fa-shopping-cart"></i>
+    {% if produits > 0 %}
+          {{produits}} Produit(s) :
+      <b>{{ price|format_currency('EUR') }}</b>
+      </a>
+          {% else %}
+          Pannier vide !
+      </a>
+          {% endif %}
+      
     </h1>
     <div class="col-md-12 btn-group btn-group-lg" role="group">
       <a class="btn btn-primary" href="{{ path('boutique') }}">
         Continuer les Courses
       </a>
-      <a class="btn btn-primary" href="/mi5/fr/panier/commander">
+      {% if app.user %}
+         <a class="btn btn-primary" href="{{ path('cart.order') }}">
         Passer la Commande
       </a>
+          {% else %}
+          <a class="btn btn-secondary" href="{{ path('cart.order') }}">
+        Connectez-vous afin de passer votre commande
+      </a>
+          {% endif %}
+      
     </div>
   </div>
   <div class="card-body">
@@ -49,36 +64,36 @@
           <tr>
             <td>
               <img
-                src="/images/articles/{{ article.visuel }}"
+                src="/images/articles/{{ article["produit"].visuel }}"
                 class="cart-img-produit"
-                alt="{{ article.libelle }}"
+                alt="{{ article["produit"].libelle }}"
               />
             </td>
             <td>
-              <a href="{{ path('category.show', {id: article.idCategory.id} )}}">
-                <b>{{ article.libelle }}</b>
+              <a href="{{ path('category.show', {id: article["produit"].idCategory.id} )}}">
+                <b>{{ article["produit"].libelle }}</b>
               </a>
             </td>
-            <td class="text-right">{{ article.prix }}</td>
+            <td class="text-right">{{ article["produit"].prix }}</td>
             <td>
-              <a href="{{ path('cart.remove', {id: article.id}) }}">
+              <a href="{{ path('cart.remove', {id: article["produit"].id}) }}">
                 <i class="fas fa-minus-square text-muted"></i>
               </a>
-              1
-              <a href="{{ path('cart.add', {id: article.id}) }}">
+              {{article["quantite"]}}
+              <a href="{{ path('cart.add', {id: article["produit"].id}) }}">
                 <i class="fas fa-plus-square text-muted"></i>
               </a>
             </td>
-            <td class="text-right">{{ article.prix * 2 }}</td>
+            <td class="text-right">{{ (article["produit"].prix * article["quantite"])|format_currency('EUR') }}</td>
             <td>
-              <a href="{{ path('cart.delete', {id: article.id}) }}">
+              <a href="{{ path('cart.delete', {id: article["produit"].id}) }}">
                 <i
                   class="fas fa-trash text-muted"
                   data-toggle="tooltip"
                   title=""
                   data-placement="right"
                   data-html="true"
-                  data-original-title="Supprimer {{ article.libelle }}"
+                  data-original-title="Supprimer {{ article["produit"].libelle }}"
                 ></i>
               </a>
             </td>
@@ -88,7 +103,7 @@
         <thead>
           <tr>
             <th class="text-right" colspan="4">Total</th>
-            <th class="text-right">1,81&nbsp;€</th>
+            <th class="text-right">{{ price|format_currency('EUR') }}</th>
             <th>
               <a href="{{ path('cart.empty') }}">
                 <i
