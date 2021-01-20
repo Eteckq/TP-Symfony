@@ -61,10 +61,11 @@
         >
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form method="POST" action="{{path('search')}}" class="form-inline my-2 my-lg-0">
       <input
         class="form-control mr-sm-2"
         type="search"
+        name="search"
         placeholder="Chercher des produits"
         aria-label="Search"
       />
@@ -72,6 +73,33 @@
         <i class="fas fa-search"></i>
       </button>
     </form>
+
+    {# Devise #}
+    <ul class="navbar-nav my-0">
+      <li class="nav-item dropdown">
+        <span
+          class="nav-link dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          {{ devise() }}
+        </span>
+        <div
+          class="dropdown-menu"
+          aria-labelledby="dropdownDevise"
+          style="min-width: 5rem"
+        >
+        {% for key, value in availableDevises() %}
+          <a class="dropdown-item" href="{{ path("devise", {'devise': key}) }}">{{ key }}</a>
+        {% endfor %}
+          
+        </div>
+      </li>
+    </ul>
+
+
+    {# Langages #}
     <ul class="navbar-nav my-0">
       <li class="nav-item dropdown">
         <span
@@ -84,7 +112,7 @@
         </span>
         <div
           class="dropdown-menu"
-          aria-labelledby="dropdown03"
+          aria-labelledby="dropdownLang"
           style="min-width: 5rem"
         >
           {% for locale in locales %}
@@ -97,5 +125,6 @@
         </div>
       </li>
     </ul>
+
   </div>
 </nav>

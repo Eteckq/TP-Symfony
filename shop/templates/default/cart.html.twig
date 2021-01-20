@@ -22,7 +22,7 @@
     <i class="fas fa-shopping-cart"></i>
     {% if produits > 0 %}
           {{produits}} Produit(s) :
-      <b>{{ price|format_currency('EUR') }}</b>
+      <b>{{ price|currency_convert|format_currency(devise())}}</b>
       </a>
           {% else %}
           Pannier vide !
@@ -74,7 +74,7 @@
                 <b>{{ article["produit"].libelle }}</b>
               </a>
             </td>
-            <td class="text-right">{{ article["produit"].prix }}</td>
+            <td class="text-right">{{ (article["produit"].prix)|currency_convert|format_currency(devise()) }}</td>
             <td>
               <a href="{{ path('cart.remove', {id: article["produit"].id}) }}">
                 <i class="fas fa-minus-square text-muted"></i>
@@ -84,7 +84,7 @@
                 <i class="fas fa-plus-square text-muted"></i>
               </a>
             </td>
-            <td class="text-right">{{ (article["produit"].prix * article["quantite"])|format_currency('EUR') }}</td>
+            <td class="text-right">{{ (article["produit"].prix * article["quantite"])|currency_convert|format_currency(devise()) }}</td>
             <td>
               <a href="{{ path('cart.delete', {id: article["produit"].id}) }}">
                 <i
@@ -103,7 +103,7 @@
         <thead>
           <tr>
             <th class="text-right" colspan="4">Total</th>
-            <th class="text-right">{{ price|format_currency('EUR') }}</th>
+            <th class="text-right">{{ (price)|currency_convert|format_currency(devise()) }}</th>
             <th>
               <a href="{{ path('cart.empty') }}">
                 <i

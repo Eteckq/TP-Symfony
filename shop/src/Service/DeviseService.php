@@ -8,51 +8,55 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class DeviseService
 {
     const API_ENDPOINT = "https://api.exchangeratesapi.io/latest";
-    const SUPPORTED_CURRENCIES = ["USD", "GPB"];
+    const SUPPORTED_DEVISES = ["USD", "GBP"];
     const DEVISE_SESSION = 'devise';
 
-    public $rates = [
+    private $rates = [
         "EUR" => 1,
     ];
-    public $userCurrency = "EUR";
-    public $userSession;
+    private $currentDevise = "EUR";
+    private $session;
 
     public function __construct(SessionInterface $session)
     {
-        $this->userSession = $session;
-        $this->initCurrencies();
-        $this->userCurrency = $session->get(self::DEVISE_SESSION, "EUR");
+        $this->session = $session;
+        $this->initDevises();
+        $this->currentDevise = $session->get(self::DEVISE_SESSION, "EUR");
     }
 
-    private function initCurrencies()
+    private function initDevises()
     {
         $client = HttpClient::create();
 
         $res = $client->request("GET", self::API_ENDPOINT)->toArray();
 
-        foreach ($res["rates"] as $currency => $rate) {
-            foreach (self::SUPPORTED_CURRENCIES as $SUPPORTED_CURRENCY) {
-                if ($SUPPORTED_CURRENCY == $currency) {
-                    $this->rates[$currency] = $rate;
+        foreach ($res["rates"] as $devise => $rate) {
+            foreach (self::SUPPORTED_DEVISES as $supportedDevise) {
+                if ($supportedDevise == $devise) {
+                    $this->rates[$devise] = $rate;
                 }
             }
         }
     }
 
-    public function getUserCurrency($baseAmount) {
-        return $this->toCurrency($baseAmount, $this->userCurrency);
+    public function getAvailableDevises(){
+        return $this->rates;
     }
 
-    public function getStringCurrency() {
-        return $this->userCurrency;
+    public function transformToCurrentDevise($baseAmount) {
+        return $this->toDevise($baseAmount, $this->currentDevise);
     }
 
-    public function setUserCurrency($currency) {
-        $this->userCurrency = $currency;
-        $this->userSession->set(self::DEVISE_SESSION, $this->userCurrency);
+    public function getDevise() {
+        return $this->currentDevise;
     }
 
-    private function toCurrency($baseAmount, $currency) {
-        return $baseAmount * ( $this->rates[$currency] );
+    public function setUserDevise($devise) {
+        $this->currentDevise = $devise;
+        $this->session->set(self::DEVISE_SESSION, $this->currentDevise);
+    }
+
+    private function toDevise($baseAmount, $devise) {
+        return $baseAmount * ( $this->rates[$devise] );
     }
 }

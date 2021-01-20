@@ -23,6 +23,10 @@ class BoutiqueService {
         return $this->categories->findAll();
     }
 
+    public function findArticlesFromQuery($query){
+        return $this->articles->findFromQuery($query);
+    }
+
     public function getTopSales($max){
         return $this->commandLines->findTopSells($max);
     }

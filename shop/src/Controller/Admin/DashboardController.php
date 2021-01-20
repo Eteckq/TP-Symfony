@@ -9,15 +9,39 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+use App\Service\OrderService;
+use App\Entity\Command;
+
 class DashboardController extends AbstractDashboardController
 {
+    private $order;
+
+    public function __construct(OrderService $order) {
+        $this->order = $order;
+    }
+
     /**
     * @Route("/{_locale}/admin", requirements={"_locale"="fr|en|es"}, name="admin")
     * @IsGranted("ROLE_ADMIN")
      */
     public function index(): Response
     {
-        return parent::index();
+        return $this->render('admin/orders.html.twig', [
+            'menu' => 'back',
+            'orders' => $this->order->findAllCommandsToValidate(),
+        ]);
+    }
+
+    /**
+     * @Route("order/{id}/validate", name="admin.validate", methods={"GET"})
+     */
+    public function edit(Command $command)
+    {
+        $command->setStatut("Validée");
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($command);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
     }
 
     public function configureDashboard(): Dashboard

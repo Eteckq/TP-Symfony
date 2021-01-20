@@ -2,6 +2,7 @@
 namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Service\BoutiqueService;
 
 class DefaultController extends AbstractController {
@@ -12,6 +13,7 @@ class DefaultController extends AbstractController {
     public function index() {
         return $this->render('default/index.html.twig', [
             'menu' => "home",
+            
         ]);
     }
 
@@ -24,10 +26,24 @@ class DefaultController extends AbstractController {
         ]);
     }
 
+    /**
+    * @Route("/{_locale}/search", name="search", requirements={"_locale": "fr|en|es"})
+    */
+    public function search(Request $request, BoutiqueService $boutique) {
+        $query = $request->get('search');
+
+        return $this->render('default/search.html.twig', [
+            'menu' => "home",
+            'articles' => $boutique->findArticlesFromQuery($query),
+            'query' => $query
+        ]);
+
+        
+    }
+
     public function topSales(BoutiqueService $boutique, $max){
-        $articles = $boutique->getTopSales($max);
         return $this->render('_partials/_top-products.html.twig', [
-            'articles' => $articles
+            'articles' => $boutique->getTopSales($max),
         ]);
     }
     

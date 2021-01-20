@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche{% endblock %}
+
+{% block body %}
+<div class="card col-md-12">
+     <div class="card-header">
+    <h1><i class="fas fa-search"></i> {{query}}</h1>
+  </div>
+   <div class="card-body row">
+   
+   
+    {% for article in articles %}
+    <div class="col-md-3">
+      <a
+        class="card clickable"
+        href="{{ path('cart.add', {id: article.id}) }}" 
+      >
+        <img
+          src="/images/articles/{{ article.visuel }}"
+          class="card-img-top"
+          alt="{{ article.libelle }}"
+        />
+        <div class="card-body">
+          <h4 class="card-title">{{ article.libelle }}</h4>
+          <p class="card-text"><i>{{ article.texte }}</i></p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}
