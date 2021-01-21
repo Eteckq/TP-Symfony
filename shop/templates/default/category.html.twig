@@ -21,6 +21,12 @@
         <div class="card-body">
           <h4 class="card-title">{{ article.libelle }}</h4>
           <p class="card-text"><i>{{ article.texte }}</i></p>
+          <h2>
+            <span class="badge badge-primary">
+              <i class="fas fa-cart-plus"></i>
+              {{ (article.prix)|currency_convert|format_currency(devise()) }}
+            </span>
+          </h2>
         </div>
       </a>
     </div>

@@ -1,5 +1,5 @@
-php version: 7.4.\*
-extension "extension=pdo_mysql" must be enable
+php version: 7.4.x
+extension "extension=pdo_mysql" and "extension=gd2" must be enable
 
 database login:
 user: root
@@ -14,7 +14,6 @@ Bonus réalisés:
 -Sidebar "Top Ventes"
 -Gestion des devises
 -Back office
--Possibilité de valider les commandes (dans l'accueil le back office)
-
-À faire:
-Recherche de produit
+-Possibilité de valider les commandes (dans l'accueil du back office)
+-Recherche de produit
+-Captcha lors d'une inscription

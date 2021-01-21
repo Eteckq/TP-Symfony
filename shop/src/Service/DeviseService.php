@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class DeviseService
 {
     const API_ENDPOINT = "https://api.exchangeratesapi.io/latest";
-    const SUPPORTED_DEVISES = ["USD", "GBP"];
+    const SUPPORTED_DEVISES = ["USD", "GBP", "PHP"];
     const DEVISE_SESSION = 'devise';
 
     private $rates = [
