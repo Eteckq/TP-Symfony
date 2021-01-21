@@ -116,7 +116,7 @@ class Category
     }
 
     public function __toString()
-{
-    return (string) $this->getTexte();
-}
+    {
+        return (string) $this->getLibelle();
+    }
 }

@@ -62,12 +62,15 @@ class CartController extends AbstractController {
     * @Route("/order", name="cart.order")
     * @IsGranted("ROLE_USER")
     */
-    public function orderCart(\Swift_Mailer $mailer) {
+    public function orderCart() {
         $cartContent = $this->panier->getContenu();
         if(count($cartContent) == 0){
             $this->addFlash('error', 'Panier vide');
             return $this->redirectToRoute("cart");
         }
+
+        // Should be done in an other method ?
+
         $entityManager = $this->getDoctrine()->getManager();
 
         $command = new Command();
@@ -88,25 +91,7 @@ class CartController extends AbstractController {
 
         $this->panier->vider();
 
-        // Send Mail
-        $message = (new \Swift_Message('Commande acceptée'))
-        ->setFrom('yohan.g99@gmail.com')
-        ->setTo('yohan.g99@gmail.com')
-        ->setBody(
-            $this->renderView(
-                'email/order.html.twig',
-                ['name' => 'Yoo']
-            ),
-            'text/html'
-        );
-        
-
-        $mailer->send($message);
-
-
-
-        
-        return $this->redirectToRoute("cart");
+        return $this->redirectToRoute("user.orders");
     }
 
     /**
